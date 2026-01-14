@@ -1,0 +1,32 @@
+
+{
+  "name": "ميزانيتك الذكية",
+  "short_name": "ميزانيتك",
+  "description": "تطبيق متطور لإدارة الشؤون المالية الشخصية والمصروفات والديون يعمل بالكامل دون إنترنت.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0077b6",
+  "theme_color": "#0077b6",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2654/2654260.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/2654/2654260.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["finance", "productivity"],
+  "shortcuts": [
+    {
+      "name": "إضافة مصروف",
+      "url": "./index.html?tab=expense",
+      "icons": [{ "src": "https://cdn-icons-png.flaticon.com/512/2654/2654260.png", "sizes": "192x192" }]
+    }
+  ]
+}
