@@ -1,8 +1,8 @@
 
 import React, { useState, useRef } from 'react';
-import { Transaction, TransactionType } from '../types';
-import { CATEGORIES, BRAND } from '../constants';
-import { generateId } from '../utils';
+import { Transaction, TransactionType } from '../types.ts';
+import { CATEGORIES, BRAND } from '../constants.ts';
+import { generateId } from '../utils.ts';
 
 interface Props {
     type: TransactionType;

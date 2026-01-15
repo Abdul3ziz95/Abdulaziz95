@@ -1,11 +1,11 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { Dashboard } from './components/Dashboard';
-import { SectionView } from './components/SectionView';
-import { AppState, Transaction, TransactionType, BalanceChange } from './types';
-import { ARABIC_CURRENCIES, BRAND } from './constants';
-import { loadState, saveState } from './services/dbService';
-import { generateId } from './utils';
+import { Dashboard } from './components/Dashboard.tsx';
+import { SectionView } from './components/SectionView.tsx';
+import { AppState, Transaction, TransactionType, BalanceChange } from './types.ts';
+import { ARABIC_CURRENCIES, BRAND } from './constants.ts';
+import { loadState, saveState } from './services/dbService.ts';
+import { generateId } from './utils.ts';
 
 const calculateBalanceImpact = (t: Transaction, revert: boolean = false): number => {
     let impact = 0;
@@ -274,7 +274,7 @@ const App: React.FC = () => {
                 </div>
 
                 <div className="max-w-4xl mx-auto flex bg-white dark:bg-[#1e1e1e] border-b dark:border-zinc-800 overflow-x-auto no-scrollbar">
-                    <TabBtn active={activeTab === 'overview'} onClick={() => setActiveTab('overview'} label="الرئيسية" icon="fa-tachometer-alt" />
+                    <TabBtn active={activeTab === 'overview'} onClick={() => setActiveTab('overview')} label="الرئيسية" icon="fa-tachometer-alt" />
                     <TabBtn active={activeTab === 'expense'} onClick={() => setActiveTab('expense')} label="مصروفات" icon="fa-money-bill-wave" />
                     <TabBtn active={activeTab === 'right'} onClick={() => setActiveTab('right')} label="حقوق" icon="fa-handshake" />
                     <TabBtn active={activeTab === 'debt'} onClick={() => setActiveTab('debt')} label="التزامات" icon="fa-file-invoice" />

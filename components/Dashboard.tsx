@@ -1,7 +1,8 @@
+
 import React, { useState } from 'react';
-import { AppState, BalanceChange } from '../types';
-import { formatCurrency, formatDate } from '../utils';
-import { BRAND } from '../constants';
+import { AppState, BalanceChange } from '../types.ts';
+import { formatCurrency, formatDate } from '../utils.ts';
+import { BRAND } from '../constants.ts';
 
 interface DashboardProps {
     state: AppState;
@@ -21,7 +22,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ state, onDeposit, onWithdr
         .reduce((sum, t) => sum + (t.amount || 0), 0);
 
     const totalRights = state.transactions
-        .filter(t => t.type === 'right' && t.status !== 'مدفوع' && t.status !== 'كامل')
+        .filter(t => t.type === 'right' && t.status !== 'مدفوع' && t.status !== 'كامل' && t.status !== 'مدفوع بالكامل')
         .reduce((sum, t) => sum + (t.amount || 0), 0);
 
     const totalDebts = state.transactions
@@ -117,7 +118,7 @@ export const Dashboard: React.FC<DashboardProps> = ({ state, onDeposit, onWithdr
             {actionModal && (
                 <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setActionModal(null)}></div>
-                    <div className="bg-white dark:bg-[#1e1e1e] w-full max-w-sm rounded-3xl overflow-hidden shadow-2xl relative animate-slide-up">
+                    <div className="bg-white dark:bg-[#1e1e1e] w-full max-sm rounded-3xl overflow-hidden shadow-2xl relative animate-slide-up">
                         <div className="p-6 bg-[#0077b6] text-white flex justify-between items-center">
                             <h3 className="font-bold">{actionModal === 'deposit' ? 'إيداع رصيد جديد' : 'سحب/تحويل رصيد'}</h3>
                             <button onClick={() => setActionModal(null)} className="active-scale p-1"><i className="fas fa-times"></i></button>

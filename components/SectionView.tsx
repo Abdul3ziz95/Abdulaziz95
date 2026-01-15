@@ -1,10 +1,10 @@
 
 import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { Transaction, TransactionType } from '../types';
-import { TransactionForm } from './TransactionForm';
-import { HistoryList } from './HistoryList';
-import { BRAND, CATEGORIES } from '../constants';
-import { formatCurrency, formatDate } from '../utils';
+import { Transaction, TransactionType } from '../types.ts';
+import { TransactionForm } from './TransactionForm.tsx';
+import { HistoryList } from './HistoryList.tsx';
+import { BRAND, CATEGORIES } from '../constants.ts';
+import { formatCurrency, formatDate } from '../utils.ts';
 
 interface Props {
     type: TransactionType;
@@ -312,7 +312,7 @@ export const SectionView: React.FC<Props> = ({ type, transactions, currency, bal
 
                             {viewingTransaction.imageUrl && (
                                 <div className="relative group cursor-pointer" onClick={() => setShowInvoiceFullscreen(true)}>
-                                    <img src={viewingTransaction.imageUrl} className="w-full h-48 object-cover rounded-[2rem] border-4 border-zinc-50 dark:border-zinc-800 shadow-sm" alt="Invoice" />
+                                    <img src={viewingTransaction.imageUrl} alt="Invoice" className="w-full h-48 object-cover rounded-[2rem] border-4 border-zinc-50 dark:border-zinc-800 shadow-sm" />
                                     <div className="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded-[2rem]">
                                         <i className="fas fa-expand text-white text-3xl"></i>
                                     </div>
@@ -348,7 +348,7 @@ export const SectionView: React.FC<Props> = ({ type, transactions, currency, bal
             {showInvoiceFullscreen && viewingTransaction?.imageUrl && (
                 <div className="fixed inset-0 z-[1300] bg-black/98 flex flex-col items-center justify-center p-4 animate-fade-in">
                     <button onClick={() => setShowInvoiceFullscreen(false)} className="absolute top-10 right-10 text-white/50 hover:text-white text-4xl active-scale"><i className="fas fa-times"></i></button>
-                    <img src={viewingTransaction.imageUrl} className="max-w-full max-h-[85vh] rounded-[2rem] animate-scale-in shadow-2xl object-contain" alt="Full Invoice" />
+                    <img src={viewingTransaction.imageUrl} alt="Full Invoice" className="max-w-full max-h-[85vh] rounded-[2rem] animate-scale-in shadow-2xl object-contain" />
                 </div>
             )}
         </div>

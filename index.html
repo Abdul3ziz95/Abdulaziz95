@@ -89,13 +89,12 @@
 <body class="transition-colors duration-300">
     <div id="root"></div>
 
-    <!-- Entry Point Script: Using Babel to handle the TSX file -->
-    <script type="text/babel" data-type="module" src="index.tsx"></script>
+    <!-- Entry Point Script: Adding typescript and react presets -->
+    <script type="text/babel" data-presets="react,typescript" data-type="module" src="index.tsx"></script>
 
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                // التأكد من أن المسار صحيح لبيئة GitHub Pages
                 const swPath = window.location.pathname.includes('Abdulaziz95') 
                     ? '/Abdulaziz95/sw.js' 
                     : './sw.js';

@@ -1,8 +1,8 @@
 
 import React from 'react';
-import { Transaction } from '../types';
-import { formatDate, formatCurrency } from '../utils';
-import { BRAND } from '../constants';
+import { Transaction } from '../types.ts';
+import { formatDate, formatCurrency } from '../utils.ts';
+import { BRAND } from '../constants.ts';
 
 interface Props {
     transactions: Transaction[];
