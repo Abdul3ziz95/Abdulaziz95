@@ -1,17 +1,14 @@
 
-const CACHE_NAME = 'budget-smart-ghp-v1';
+const CACHE_NAME = 'budget-smart-v6';
 const ASSETS = [
+  './',
   './index.html',
   './manifest.json',
-  './App.tsx',
-  './constants.ts',
-  './types.ts',
-  './utils.ts',
-  './services/dbService.ts',
-  './components/Dashboard.tsx',
-  './components/SectionView.tsx',
-  './components/TransactionForm.tsx',
-  './components/HistoryList.tsx'
+  './index.tsx',
+  'https://cdn.tailwindcss.com',
+  'https://unpkg.com/@babel/standalone/babel.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css',
+  'https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap'
 ];
 
 self.addEventListener('install', (e) => {
@@ -32,12 +29,6 @@ self.addEventListener('activate', (e) => {
 
 self.addEventListener('fetch', (e) => {
   e.respondWith(
-    caches.match(e.request).then(response => {
-      return response || fetch(e.request).catch(() => {
-        if (e.request.mode === 'navigate') {
-          return caches.match('./index.html');
-        }
-      });
-    })
+    caches.match(e.request).then(res => res || fetch(e.request))
   );
 });

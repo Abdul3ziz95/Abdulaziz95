@@ -41,11 +41,18 @@
         }
         @keyframes rotation { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         .dark-mode { background-color: var(--bg-dark) !important; color: #f0f0f0 !important; }
+        
         #error-display {
-            display: none; background: rgba(255,255,255,0.1); padding: 15px;
+            display: none; background: rgba(0,0,0,0.2); padding: 15px;
             border-radius: 12px; margin-top: 20px; color: #ffcfcf;
-            font-size: 11px; max-width: 80%; word-break: break-all; font-family: monospace;
+            font-size: 12px; max-width: 85%; word-break: break-all; font-family: monospace;
+            text-align: center;
         }
+
+        /* Animations */
+        @keyframes toast-in { from { transform: translate(-50%, 100%); opacity: 0; } to { transform: translate(-50%, 0); opacity: 1; } }
+        .animate-toast { animation: toast-in 0.3s ease-out forwards; }
+        .active-scale:active { transform: scale(0.95); }
     </style>
 
     <script type="importmap">
@@ -65,78 +72,33 @@
         <span class="loader"></span>
         <h1 class="text-white mt-4 font-bold text-lg animate-pulse">جاري تشغيل ميزانيتك...</h1>
         <div id="error-display"></div>
-        <button id="retry-btn" onclick="location.reload()" style="display:none" class="mt-4 px-6 py-2 bg-white text-[#0077b6] rounded-full font-bold shadow-lg active:scale-95 transition-all">إعادة المحاولة</button>
+        <button id="retry-btn" onclick="location.reload()" style="display:none" class="mt-4 px-6 py-2 bg-white text-[#0077b6] rounded-full font-bold shadow-lg active-scale">إعادة المحاولة</button>
     </div>
 
     <div id="root"></div>
 
-    <!-- نظام مراقبة الأخطاء المبكر -->
+    <!-- تحميل الكود الرئيسي عبر Babel وترجمته فورياً -->
+    <script type="text/babel" src="index.tsx" data-presets="react,typescript"></script>
+
     <script>
-        const displayError = (err) => {
+        // نظام رصد أخطاء التحميل
+        window.onerror = (msg, url, line) => {
             const display = document.getElementById('error-display');
             const retry = document.getElementById('retry-btn');
             if (display) {
                 display.style.display = 'block';
-                display.innerText = "Error: " + (err.message || err);
+                display.innerText = "حدث خطأ أثناء تحميل التطبيق. تأكد من رفع كافة الملفات بشكل صحيح.";
+                console.error("Critical:", msg, "at", url, ":", line);
             }
             if (retry) retry.style.display = 'block';
-            console.error("App Launch Error:", err);
         };
 
-        window.onerror = (msg, url, line) => {
-            displayError(`${msg} at ${url}:${line}`);
-            return false;
-        };
-
-        window.onunhandledrejection = (event) => {
-            displayError("Unhandled Promise: " + event.reason);
-        };
-    </script>
-
-    <!-- التشغيل عبر Babel مع معالجة الاستيرادات المحلية -->
-    <script type="text/babel" data-presets="react,typescript" data-type="module">
-        import React from 'react';
-        import ReactDOM from 'react-dom/client';
-        // ملاحظة: استيراد index.tsx لضمان اتباع هيكلية المشروع
-        import App from './App.tsx';
-
-        const start = () => {
-            try {
-                const rootElement = document.getElementById('root');
-                if (!rootElement) throw new Error("Root element not found");
-                
-                const root = ReactDOM.createRoot(rootElement);
-                root.render(
-                    <React.StrictMode>
-                        <App />
-                    </React.StrictMode>
-                );
-
-                // إخفاء شاشة التحميل
-                setTimeout(() => {
-                    const ls = document.getElementById('loading-screen');
-                    if (ls) {
-                        ls.style.opacity = '0';
-                        setTimeout(() => ls.remove(), 500);
-                    }
-                }, 800);
-            } catch (e) {
-                window.displayError(e);
-            }
-        };
-
-        // التأكد من أن DOM جاهز تماماً
-        if (document.readyState === 'complete') start();
-        else window.addEventListener('load', start);
-    </script>
-
-    <script>
-        // الخدمة غير المتصلة (PWA) مع مسار نسبي صارم
+        // تسجيل الـ Service Worker للعمل أوفلاين
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
                 navigator.serviceWorker.register('./sw.js', { scope: './' })
-                    .then(() => console.log("SW Registered"))
-                    .catch(err => console.warn("SW Offline feature disabled in this environment"));
+                    .then(reg => console.log("Offline mode ready"))
+                    .catch(err => console.warn("Offline mode unavailable"));
             });
         }
     </script>
