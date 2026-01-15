@@ -11,7 +11,7 @@
     <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2654/2654260.png">
     <link rel="manifest" href="manifest.json">
     
-    <title>ميزانيتك الذكية</title>
+    <title>ميزانيتك الذكية - النسخة الفاخرة</title>
     
     <!-- CSS & Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -27,18 +27,20 @@
         :root { --brand-primary: #0077b6; }
         body {
             font-family: 'Tajawal', sans-serif;
-            background-color: #f7f9fc;
+            background-color: #f8fafc;
             margin: 0; padding: 0; overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
+            transition: background-color 0.3s ease;
         }
-        .dark-mode { background-color: #121212 !important; color: #f0f0f0 !important; }
-        .dark-mode .bg-white { background-color: #1e1e1e !important; }
-        .dark-mode .text-zinc-400 { color: #888 !important; }
+        .dark-mode { background-color: #0f172a !important; color: #f1f5f9 !important; }
+        .dark-mode .bg-white { background-color: #1e293b !important; }
+        .dark-mode .border-zinc-100 { border-color: #334155 !important; }
+        .dark-mode .text-zinc-400 { color: #94a3b8 !important; }
         
         #loading-screen {
             position: fixed; inset: 0; background: var(--brand-primary);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            z-index: 9999; transition: opacity 0.5s ease;
+            z-index: 9999;
         }
         .loader {
             width: 50px; height: 50px; border: 5px solid #FFF;
@@ -50,7 +52,7 @@
         .active-scale:active { transform: scale(0.95); }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         
-        @keyframes slide-up { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes slide-up { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .animate-slide-up { animation: slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         
         .rounded-custom { border-radius: 2.5rem; }
@@ -58,19 +60,36 @@
         
         .sidebar-transition { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
         
-        /* Custom UI fixes for mobile */
+        /* Mobile input fixes */
         input, select, textarea { font-size: 16px !important; }
+        
+        .shadow-luxe { box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); }
+        
+        .transaction-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .transaction-card:hover {
+            transform: translateX(-5px);
+        }
     </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/"
+  }
+}
+</script>
 </head>
 <body>
     <div id="loading-screen">
         <span class="loader"></span>
-        <h1 class="text-white mt-4 font-bold text-lg animate-pulse">جاري تشغيل نظامك المالي...</h1>
+        <h1 class="text-white mt-4 font-bold animate-pulse">ميزانيتك الذكية - النسخة الفاخرة</h1>
     </div>
 
     <div id="root"></div>
 
-    <!-- Script loading -->
     <script type="text/babel" src="index.tsx" data-presets="react,typescript"></script>
 
     <script>

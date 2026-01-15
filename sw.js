@@ -1,5 +1,5 @@
 
-const CACHE_NAME = 'budget-smart-v15';
+const CACHE_NAME = 'budget-smart-luxe-v3';
 const ASSETS = [
   './',
   './index.html',
