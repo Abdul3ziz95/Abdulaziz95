@@ -205,7 +205,7 @@ export const SectionView: React.FC<Props> = ({ type, transactions, currency, bal
             {viewingTransaction && (
                 <div className="fixed inset-0 z-[1100] flex items-center justify-center p-4">
                     <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" onClick={() => setViewingTransaction(null)}></div>
-                    <div className="bg-white dark:bg-[#1e1e1e] w-full max-w-md rounded-[2.5rem] overflow-hidden shadow-2xl relative animate-toast p-8">
+                    <div className="bg-white dark:bg-[#1e1e1e] w-full max-w-md rounded-[2.5rem] overflow-hidden shadow-2xl relative animate-fade-in p-8">
                         <div className="text-center mb-6">
                             <span className="text-zinc-400 font-bold text-xs uppercase tracking-widest">{viewingTransaction.category}</span>
                             <h3 className="text-4xl font-black mt-2" style={{ color }}>{balanceHidden ? '••••' : formatCurrency(viewingTransaction.amount, currency)}</h3>
